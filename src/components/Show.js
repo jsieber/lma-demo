@@ -26,7 +26,6 @@ class Show extends React.Component {
         //this.setState({shows: res.data.response.docs});
         //this.setState({showDetails: res.data});
 
-        //const audioFiles = res.data.files.map(getmp3files);
 
         const audioFiles = res.data.files.filter(function(item){
           return item.name.slice(-3) === "mp3";
