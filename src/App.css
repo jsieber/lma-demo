@@ -22,6 +22,18 @@
   color: #61dafb;
 }
 
+.showList {
+  font-size: 16px;
+}
+
+ul.showList {
+  list-style-type: none;
+}
+
+li.showList {
+  margin: 15px 15px 15px 5px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
