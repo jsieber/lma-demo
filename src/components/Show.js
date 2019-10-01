@@ -10,7 +10,7 @@ class Show extends React.Component {
     //console.log(this.props.match.params.identifier);
     this.state = {
       shows: [],
-      loading: false,
+      loading: true,
       error: null
     };
   }
@@ -18,7 +18,7 @@ class Show extends React.Component {
   componentDidMount() {
     axios.get(`https://archive.org/metadata/${this.props.match.params.identifier}`)
       .then(res => {
-        //console.log(res.data);
+        console.log(res.data);
         //console.log(res.data.files);
         //console.log(res.data.metadata.title);
         // Update state to trigger a re-render.
@@ -31,34 +31,22 @@ class Show extends React.Component {
           return item.name.slice(-3) === "mp3";
         });
 
-        const testplaylist = [
-                {
-                  url:
-                    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                  title: 'Big Buck Bunny'
-                },
-                {
-                  url:
-                    'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-                  title: 'Elephants Dream'
-                }
-              ];
+        const playlist = audioFiles.forEach(item => (item.url = "https://archive.org/download/" + res.data.metadata.identifier + "/" + item.name ));
 
-
-        //console.log(audioFiles);
+        //console.log(playlist);
         this.setState({
-          loading: false,
           error: null,
           identifier: res.data.metadata.identifier,
           date: res.data.metadata.date,
+          description: res.data.metadata.description,
           publicDate: res.data.metadata.publicdate,
           title: res.data.metadata.title,
           taper: res.data.metadata.taper,
           files: res.data.files,
           headerImage: `https://archive.org/download/${res.data.metadata.identifier}/${res.data.files[0].name}`,
           audioFiles: audioFiles,
-          playlist: testplaylist,
-          sampleaudiolink: `https://archive.org/download/${res.data.metadata.identifier}/${audioFiles[0].name}`
+          sampleaudiolink: `https://archive.org/download/${res.data.metadata.identifier}/${audioFiles[0].name}`,
+          loading: false,
         });
 
       })
@@ -90,9 +78,9 @@ class Show extends React.Component {
       return this.renderError();
     }
     console.log(this.state.audioFiles);
-    console.log(this.state.playlist);
-    const theplaylist = this.state.playlist;
-    console.log(theplaylist);
+    //console.log(this.state.playlist);
+    //const theplaylist = this.state.playlist;
+    //console.log(theplaylist);
     return (
 
       <div>
@@ -100,8 +88,8 @@ class Show extends React.Component {
         <img src={this.state.headerImage} alt={this.state.title} width="250" />
         <p>{this.state.date}</p>
         <p>{this.state.title} Taper: {this.state.taper}</p>
-        <p>{this.state.sampleaudiolink}</p>
-
+        <p>{this.state.description}</p>
+        <MediaPlayer playlist={this.state.audioFiles} />
         <Link to='/'>Back</Link>
       </div>
     );

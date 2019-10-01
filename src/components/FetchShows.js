@@ -73,7 +73,7 @@ class FetchShows extends React.Component {
           {this.state.groupedShows.map(show =>
 
             <ListGroup.Item action variant="light" key={show[0].identifier} className="showList">
-              <Link to={`/show/${show[0].identifier}`}>{show[0].title} - versions {show.length}</Link>
+              <Link to={`/show/${show[0].identifier}`}>{show[0].title}</Link> - <Link to={`/versions/${show[0].date}`}>versions {show.length}</Link>
             </ListGroup.Item>
           )}
       </ListGroup>
