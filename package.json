@@ -6,7 +6,7 @@
   "dependencies": {
     "@cassette/core": "^2.0.0-beta.2",
     "@cassette/player": "^2.0.0-beta.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "react": "^16.8.1",
     "react-bootstrap": "^1.0.0-beta.6",
