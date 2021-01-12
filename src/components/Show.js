@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-//import WaveSurfer from 'wavesurfer.js';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -85,23 +84,15 @@ class Show extends React.Component {
      }))
    };
 
+   handlePlay = (): void => {this.setState((prevState) => ({playing:true}))};
 
+   handlePause = (): void => {this.setState((prevState) => ({playing:false}))};
 
    handleClickPlayList = (c,i): void => {
-     //console.log(i);
-     if(c === i){
-       this.setState((prevState) => ({
-         playing: false,
-         //currentMusicIndex: i,
-       }))
-       //this.playerRef.current.audio.current.pause();
-     }else{
-       this.setState((prevState) => ({
-         playing: true,
-         currentMusicIndex: i,
-       }))
-     }
+     console.log(this.playerRef);
+
    };
+
 
   renderLoading() {
     return <div>Loading...</div>;
@@ -153,11 +144,8 @@ class Show extends React.Component {
                 src={playlist[currentMusicIndex].src}
                 onClickPrevious={this.handleClickPrevious}
                 onClickNext={this.handleClickNext}
-                /*onPlay={() => {
-                  //PlaynPause(true);
-                  //console.log(PlayerRef);
-                  SetPlayerRef(PlayerRef);
-                }}*/
+                onPlay={this.handlePlay}
+                onPause={this.handlePause}
                 /*
                 onPause={() => {
                   //PlaynPause(false);
@@ -195,7 +183,7 @@ class Show extends React.Component {
                       */
 
                        style={{ textAlign: "left" }}>
-                        {this.state.currentMusicIndex === index ? <FaStop /> : <FaPlay />}
+                        {this.state.currentMusicIndex === index && this.state.playing ? <FaPlay /> : "" }
 
                           <div>
                             {index + 1} - {track.title}
