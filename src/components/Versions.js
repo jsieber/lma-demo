@@ -16,7 +16,7 @@ class fetchVersions extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`https://archive.org/advancedsearch.php?q=collection%3AJoeRussosAlmostDead+date%3A${this.props.match.params.date}&fl%5B%5D=avg_rating&fl%5B%5D=collection&fl%5B%5D=contributor&fl%5B%5D=date&fl%5B%5D=downloads&fl%5B%5D=format&fl%5B%5D=headerImage&fl%5B%5D=identifier&fl%5B%5D=publisher&fl%5B%5D=source&fl%5B%5D=title&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json`)
+    axios.get(`https://cors.archive.org/advancedsearch.php?q=collection%3AJoeRussosAlmostDead+date%3A${this.props.match.params.date}&fl%5B%5D=avg_rating&fl%5B%5D=collection&fl%5B%5D=contributor&fl%5B%5D=date&fl%5B%5D=downloads&fl%5B%5D=format&fl%5B%5D=headerImage&fl%5B%5D=identifier&fl%5B%5D=publisher&fl%5B%5D=source&fl%5B%5D=title&sort%5B%5D=&sort%5B%5D=&sort%5B%5D=&rows=50&page=1&output=json`)
       .then(res => {
         //console.log(res.data.response.docs);
         //console.log(res.data.files);

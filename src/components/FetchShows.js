@@ -24,7 +24,7 @@ class FetchShows extends React.Component {
 
   componentDidMount() {
 
-    axios.get(`https://www.archive.org/advancedsearch.php?q=collection%3A${collection}&fl%5B%5D=avg_rating&fl%5B%5D=date&fl%5B%5D=downloads&fl%5B%5D=format&fl%5B%5D=identifier&fl%5B%5D=imagecount&fl%5B%5D=title&sort%5B%5D=${sort}&rows=${rows}&page=1&output=json`)
+    axios.get(`https://cors.archive.org/advancedsearch.php?q=collection%3A${collection}&fl%5B%5D=avg_rating&fl%5B%5D=date&fl%5B%5D=downloads&fl%5B%5D=format&fl%5B%5D=identifier&fl%5B%5D=imagecount&fl%5B%5D=title&sort%5B%5D=${sort}&rows=${rows}&page=1&output=json`)
       .then(res => {
 
         //use underscore.js to group array.

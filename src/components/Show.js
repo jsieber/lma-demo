@@ -26,7 +26,7 @@ class Show extends React.Component {
 
   componentDidMount() {
 
-    axios.get(`https://archive.org/metadata/${this.props.match.params.identifier}`)
+    axios.get(`https://cors.archive.org/metadata/${this.props.match.params.identifier}`)
       .then(res => {
 
         const audioFiles = res.data.files.filter(function(item){
