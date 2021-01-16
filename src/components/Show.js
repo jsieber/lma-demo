@@ -28,9 +28,12 @@ class Show extends React.Component {
 
     axios.get(`https://cors.archive.org/metadata/${this.props.match.params.identifier}`)
       .then(res => {
-
+        //console.log(res.data);
         const audioFiles = res.data.files.filter(function(item){
           return item.name.slice(-3) === "mp3";
+        });
+        const flacAudioFiles = res.data.files.filter(function(item){
+          return item.name.slice(-4) === "flac";
         });
 
         const playlist = audioFiles.map(item => {
@@ -40,8 +43,9 @@ class Show extends React.Component {
             return container;
         })
 
-        //console.log(playlist);
+
         this.setState({
+          data: res.data,
           error: null,
           identifier: res.data.metadata.identifier,
           date: res.data.metadata.date,
@@ -70,9 +74,13 @@ class Show extends React.Component {
 
   }
 
+  handleClickNext = () => {
+    this.setState((prevState) => ({
+      currentMusicIndex: prevState.currentMusicIndex < this.state.playlist.length - 1 ? prevState.currentMusicIndex + 1 : 0,
+    }))
+  }
 
-
-  handleClickPrevious = (): void => {
+  handleClickPrevious = () => {
      this.setState((prevState) => ({
        currentMusicIndex: prevState.currentMusicIndex === 0 ? this.state.playlist.length - 1 : prevState.currentMusicIndex - 1,
      }))
@@ -113,7 +121,7 @@ class Show extends React.Component {
     }
 
     //console.log(this.state.audioFiles);
-    console.log(this.state.playlist);
+    console.log(this.state.data);
     const currentMusicIndex = this.state.currentMusicIndex;
     const playlist = this.state.playlist;
 
@@ -130,6 +138,7 @@ class Show extends React.Component {
             <p>{this.state.date}</p>
             <p>{this.state.title}</p>
             <p>Taper: {this.state.taper}</p>
+            <p>Notes: {this.state.data.metadata.notes}</p>
           </Col>
         </Row>
         <Row>
@@ -153,7 +162,6 @@ class Show extends React.Component {
                   SetPlayerRef(PlayerRef);
                 }}*/
                 //onPlay={e => console.log(this.state.currentMusicIndex)}
-                //onPlay={this.handlePlayClick}
                 // other props here
               />
             </div>
@@ -169,18 +177,6 @@ class Show extends React.Component {
                       <div className="list-group-item" onClick={() => { this.setState({ playing: false, currentMusicIndex:index})
                     }}
 
-                      /*
-
-
-                      onClick={this.handleClickPlayList(currentMusicIndex,index)}
-
-
-
-                      this.setState((prevState) => ({
-                        currentMusicIndex: prevState.currentMusicIndex === index ? prevState.currentMusicIndex : 0,
-                        playing: false,
-                      })
-                      */
 
                        style={{ textAlign: "left" }}>
                         {this.state.currentMusicIndex === index && this.state.playing ? <FaPlay /> : "" }
@@ -225,7 +221,5 @@ class Show extends React.Component {
   }
 
 }
-
-
 
 export default Show;
