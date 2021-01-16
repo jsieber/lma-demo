@@ -48,10 +48,8 @@ class Show extends React.Component {
           data: res.data,
           error: null,
           identifier: res.data.metadata.identifier,
-          date: res.data.metadata.date,
           description: res.data.metadata.description,
           publicDate: res.data.metadata.publicdate,
-          title: res.data.metadata.title,
           taper: res.data.metadata.taper,
           files: res.data.files,
           headerImage: `https://archive.org/download/${res.data.metadata.identifier}/${res.data.files[0].name}`,
@@ -135,8 +133,8 @@ class Show extends React.Component {
         </Row>
         <Row>
           <Col style={{ textAlign: "center" }}>
-            <p>{this.state.date}</p>
-            <p>{this.state.title}</p>
+            <p>{this.state.data.metadata.date}</p>
+            <p>{this.state.data.metadata.title}</p>
             <p>Taper: {this.state.taper}</p>
             <p>Notes: {this.state.data.metadata.notes}</p>
           </Col>
@@ -155,6 +153,7 @@ class Show extends React.Component {
                 onClickNext={this.handleClickNext}
                 onPlay={this.handlePlay}
                 onPause={this.handlePause}
+                onEnded={this.handleClickNext}
                 /*
                 onPause={() => {
                   //PlaynPause(false);
